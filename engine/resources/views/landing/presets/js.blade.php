@@ -1,78 +1,65 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
 <script>
-function test(){
-	var tabsNewAnim = $('#navbarSupportedContent');
-	var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
-	var activeItemNewAnim = tabsNewAnim.find('.active');
-	var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
-	var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-	var itemPosNewAnimTop = activeItemNewAnim.position();
-	var itemPosNewAnimLeft = activeItemNewAnim.position();
-	$(".hori-selector").css({
-		"top":itemPosNewAnimTop.top + "px", 
-		"left":itemPosNewAnimLeft.left + "px",
-		"height": activeWidthNewAnimHeight + "px",
-		"width": activeWidthNewAnimWidth + "px"
-	});
-	$("#navbarSupportedContent").on("click","li",function(e){
-		$('#navbarSupportedContent ul li').removeClass("active");
-		$(this).addClass('active');
-		var activeWidthNewAnimHeight = $(this).innerHeight();
-		var activeWidthNewAnimWidth = $(this).innerWidth();
-		var itemPosNewAnimTop = $(this).position();
-		var itemPosNewAnimLeft = $(this).position();
-		$(".hori-selector").css({
-			"top":itemPosNewAnimTop.top + "px", 
-			"left":itemPosNewAnimLeft.left + "px",
-			"height": activeWidthNewAnimHeight + "px",
-			"width": activeWidthNewAnimWidth + "px"
-		});
-	});
-}
-$(document).ready(function(){
-	setTimeout(function(){ test(); });
-});
-$(window).on('resize', function(){
-	setTimeout(function(){ test(); }, 500);
-});
-$(".navbar-toggler").click(function(){
-	$(".navbar-collapse").slideToggle(300);
-	setTimeout(function(){ test(); });
-});
+    function setActiveTab(selector) {
+        $('#navbarSupportedContent ul li').removeClass("active");
+        $(selector).parent().addClass('active');
+        updateHoriSelector();
+        localStorage.setItem('activeTab', $(selector).attr('id'));
+    }
 
+    function updateHoriSelector(withAnimation = true) {
+        var activeItem = $('#navbarSupportedContent').find('.active');
+        var activeWidthHeight = activeItem.innerHeight();
+        var activeWidthWidth = activeItem.innerWidth();
+        var itemPosTop = activeItem.position().top;
+        var itemPosLeft = activeItem.position().left;
 
+        $(".hori-selector").css({
+            "height": activeWidthHeight + "px",
+            "width": activeWidthWidth + "px",
+        });
 
-jQuery(document).ready(function($){
-	var path = window.location.pathname.split("/").pop();
+        if (withAnimation) {
+            $(".hori-selector").animate({
+                "top": itemPosTop + "px", 
+                "left": itemPosLeft + "px"
+            }, 300);
+        } else {
+            $(".hori-selector").css({
+                "top": itemPosTop + "px", 
+                "left": itemPosLeft + "px"
+            });
+        }
+    }
 
-	if ( path == '' ) {
-		path = 'index.html';
-	}
+    $(document).ready(function(){
+        var activeTabId = localStorage.getItem('activeTab');
+        if (activeTabId) {
+            setActiveTab('#' + activeTabId);
+        } else {
+            setActiveTab('#homeLink');
+        }
 
-	var target = $('#navbarSupportedContent ul li a[href="'+path+'"]');
-	target.parent().addClass('active');
-});
+        $(window).on('resize', function(){
+            setTimeout(function() { updateHoriSelector(false); }, 500);
+        });
 
+        $(".navbar-toggler").click(function(){
+            $(".navbar-collapse").slideToggle(300);
+            setTimeout(function() { updateHoriSelector(false); });
+        });
 
+        $('#navbarSupportedContent ul li a').click(function(e) {
+            e.preventDefault();
+            setActiveTab(this);
+            
+            var target = $(this).attr('href');
 
-
-// Add active class on another page linked
-// ==========================================
-// $(window).on('load',function () {
-//     var current = location.pathname;
-//     console.log(current);
-//     $('#navbarSupportedContent ul li a').each(function(){
-//         var $this = $(this);
-//         // if the current path is like this link, make it active
-//         if($this.attr('href').indexOf(current) !== -1){
-//             $this.parent().addClass('active');
-//             $this.parents('.menu-submenu').addClass('show-dropdown');
-//             $this.parents('.menu-submenu').parent().addClass('active');
-//         }else{
-//             $this.parent().removeClass('active');
-//         }
-//     })
-// });
+            $('html, body').animate({
+                scrollTop: $(target).offset().top
+            }, 800);
+        });
+    });
 </script>
