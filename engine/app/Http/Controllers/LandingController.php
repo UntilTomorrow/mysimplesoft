@@ -17,5 +17,13 @@ class LandingController extends Controller
     {
         return view('landing.project');
     }
+    public function portfolio()
+    {
+        return view('landing.portfolio');
+    }
+    public function contact()
+    {
+        return view('landing.contact');
+    }
     
 }

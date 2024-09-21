@@ -10,7 +10,8 @@
 </head>
 <body>
 @include('landing.presets.nav')
-    <div class="landing-page">
+<div id="content">
+<div class="landing-page">
         <div class="content">
             <div class="container">
                 <div class="info">
@@ -30,6 +31,7 @@
             </div>
         </div>
     </div>
+</div>
 @include('landing.presets.js')
 </body>
 </html>

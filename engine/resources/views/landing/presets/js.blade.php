@@ -2,6 +2,40 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
 <script>
+$(document).ready(function() {
+    var activeTabId = localStorage.getItem('activeTab');
+    if (activeTabId) {
+        setActiveTab('#' + activeTabId);
+    } else {
+        setActiveTab('#homeLink');
+    }
+
+    $('#homeLink').click(function() {
+        setActiveTab(this);
+        $('#content').load(' #content > *', function() {
+            updateHoriSelector();
+        });
+    });
+
+    $('#projectsLink').click(function() {
+        setActiveTab(this);
+        $('#content').load('project #content > *', function() {
+            updateHoriSelector(); 
+        });
+    });
+	$('#portfolioLink').click(function() {
+        setActiveTab(this);
+        $('#content').load('portfolio #content > *', function() {
+            updateHoriSelector(); 
+        });
+    });
+	$('#contactLink').click(function() {
+        setActiveTab(this);
+        $('#content').load('contact #content > *', function() {
+            updateHoriSelector(); 
+        });
+    });
+
     function setActiveTab(selector) {
         $('#navbarSupportedContent ul li').removeClass("active");
         $(selector).parent().addClass('active');
@@ -25,7 +59,7 @@
             $(".hori-selector").animate({
                 "top": itemPosTop + "px", 
                 "left": itemPosLeft + "px"
-            }, 300);
+            }, 100);
         } else {
             $(".hori-selector").css({
                 "top": itemPosTop + "px", 
@@ -33,33 +67,6 @@
             });
         }
     }
+});
 
-    $(document).ready(function(){
-        var activeTabId = localStorage.getItem('activeTab');
-        if (activeTabId) {
-            setActiveTab('#' + activeTabId);
-        } else {
-            setActiveTab('#homeLink');
-        }
-
-        $(window).on('resize', function(){
-            setTimeout(function() { updateHoriSelector(false); }, 500);
-        });
-
-        $(".navbar-toggler").click(function(){
-            $(".navbar-collapse").slideToggle(300);
-            setTimeout(function() { updateHoriSelector(false); });
-        });
-
-        $('#navbarSupportedContent ul li a').click(function(e) {
-            e.preventDefault();
-            setActiveTab(this);
-            
-            var target = $(this).attr('href');
-
-            $('html, body').animate({
-                scrollTop: $(target).offset().top
-            }, 800);
-        });
-    });
 </script>
