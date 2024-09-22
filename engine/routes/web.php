@@ -15,7 +15,11 @@ Route::group(['prefix' => ''], function () {
 
 Route::group(['prefix' => 'crm'], function () {
     Route::get('/login',[CrmLoginController::class,'logincrmform'])->name('logincrmform');
-    Route::get('/index', [CrmMainController::class,'dashboardcrm'])->name('dashboardcrm');
+    Route::post('/authcrm',[CrmLoginController::class,'authcrm'])->name('authcrm');
+    
+    Route::get('/index', [CrmMainController::class,'dashboardcrm'])
+    ->middleware('auth')
+    ->name('dashboardcrm');
 });
 
 

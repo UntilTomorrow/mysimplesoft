@@ -24,9 +24,8 @@
             <p id="l-messageerror" class="l-display-none"></p>
         </div>
         <div class="l-panel-body">
-            <form class="form-horizontal" name="form-login" id="form-login" method="POST">
+        <form class="form-horizontal" name="form-login" id="form-login" method="POST" action="{{ route('authcrm') }}">
                 {{ csrf_field() }}
-
                 <div class="l-form-group">
                     <label>Email</label>
                     <input name="email" type="email" id="email" class="l-form-control" value="" required placeholder="Email">
@@ -66,7 +65,7 @@
                 submitHandler: function(form) {
                     $.ajax({
                         method: "POST",
-                        url: "{{ url('login')}}",
+                        url: "{{ url('authcrm')}}",
                         data: $("#form-login").serialize(),
                         dataType: "json",
                         beforeSend: function() {
@@ -76,7 +75,7 @@
                         success: function(data) {
                             if (data.success === 'success') {
                                 window.setTimeout(function() {
-                                    location.href = '{{ route("home") }}';
+                                    location.href = '{{ route("dashboardcrm") }}';
                                 }, 1000);
                             } else {
                                 $("#l-messageerror").html(data.message);
