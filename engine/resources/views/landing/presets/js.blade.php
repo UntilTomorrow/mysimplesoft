@@ -59,7 +59,7 @@ $(document).ready(function() {
             $(".hori-selector").animate({
                 "top": itemPosTop + "px", 
                 "left": itemPosLeft + "px"
-            }, 100);
+            }, 50);
         } else {
             $(".hori-selector").css({
                 "top": itemPosTop + "px", 
