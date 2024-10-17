@@ -10,7 +10,7 @@ class CrmMainController extends Controller
 {
     public function dashboardcrm (Request $request)
     {
-        return view('crm.frontend.dashboard');
-
+        $title = 'Dashboard CRM';
+        return view('crm.frontend.dashboard', compact('title'));
     }
 }

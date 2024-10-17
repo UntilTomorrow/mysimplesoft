@@ -1439,4 +1439,4 @@
             </div>
         </div>
 @include('crm.frontend.js')
-    </body>
+</body>

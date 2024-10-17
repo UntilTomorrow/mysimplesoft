@@ -18,8 +18,8 @@ Route::group(['prefix' => 'crm'], function () {
     Route::post('/authcrm',[CrmLoginController::class,'authcrm'])->name('authcrm');
     
     Route::get('/index', [CrmMainController::class,'dashboardcrm'])
-    ->middleware('auth')
-    ->name('dashboardcrm');
+            ->middleware('auth')
+            ->name('dashboardcrm');
 });
 
 
