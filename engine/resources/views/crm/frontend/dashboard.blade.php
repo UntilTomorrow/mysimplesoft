@@ -19,10 +19,14 @@
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Account
                         </a>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             Logout
                         </a>
+
+                        <form id="logout-form" action="{{ route('logoutcrm') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>

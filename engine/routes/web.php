@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\Crm\Auth\CrmLoginController;
+use App\Http\Controllers\Crm\Auth\CrmRegisterController;
 use App\Http\Controllers\Crm\Backend\CrmMainController;
 
 
@@ -15,7 +16,9 @@ Route::group(['prefix' => ''], function () {
 
 Route::group(['prefix' => 'crm'], function () {
     Route::get('/login',[CrmLoginController::class,'logincrmform'])->name('logincrmform');
+    Route::post('/registrasi',[CrmRegisterController::class,'registercrm'])->name('registercrm');
     Route::post('/authcrm',[CrmLoginController::class,'authcrm'])->name('authcrm');
+    Route::post('/logout',[CrmLoginController::class,'logoutcrm'])->name('logoutcrm');
     
     Route::get('/index', [CrmMainController::class,'dashboardcrm'])
             ->middleware('auth')

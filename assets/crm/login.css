@@ -1,7 +1,7 @@
 /* new login */
 
 body.l-login-background {
-  background-color: #f8f9fa;
+  background: linear-gradient(to right, #4e3a63, #556270, #4e3a63, #556270);
   font-family: "Montserrat", sans-serif;
   display: flex;
   justify-content: center;
