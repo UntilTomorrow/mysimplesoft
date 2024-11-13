@@ -42,7 +42,7 @@ class CrmLoginController extends Controller
     public function logoutcrm(Request $request)
     {
         Auth::logout();
-
+        
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

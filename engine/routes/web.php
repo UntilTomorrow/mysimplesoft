@@ -20,9 +20,11 @@ Route::group(['prefix' => 'crm'], function () {
     Route::post('/authcrm',[CrmLoginController::class,'authcrm'])->name('authcrm');
     Route::post('/logout',[CrmLoginController::class,'logoutcrm'])->name('logoutcrm');
     
-    Route::get('/index', [CrmMainController::class,'dashboardcrm'])
-            ->middleware('auth')
-            ->name('dashboardcrm');
+    Route::get('/index', [CrmMainController::class,'dashboardcrm'])->middleware('auth')->name('dashboardcrm');
+    Route::get('/leads', [CrmMainController::class,'leads'])->middleware('auth')->name('leadscrm');
+    Route::get('/leads_source', [CrmMainController::class,'leadssource'])->middleware('auth')->name('leadssource');
+    Route::get('/leads_status', [CrmMainController::class,'leadsstatus'])->middleware('auth')->name('leadsstatus');
+
 });
 
 
