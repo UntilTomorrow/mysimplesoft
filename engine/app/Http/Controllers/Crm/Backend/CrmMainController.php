@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Crm\Backend;
 
 use Illuminate\Http\Request;
 use App\Models\Lead;
-
+use App\Models\User;
+use App\Models\Source;
+use App\Models\Status;
 use App\Http\Controllers\Controller;
 
 class CrmMainController extends Controller
@@ -20,19 +22,47 @@ class CrmMainController extends Controller
         $title = 'Leads';
         $data = Lead::all();
         
-        return view('crm.frontend.leads', compact('title','data'));
+        return view('crm.frontend.leads.leads', compact('title','data'));
     }
 
     public function leadsstatus(Request $request)
     {
         $title = 'Leads Status';
-        return view('crm.frontend.leadsstatus', compact('title'));
+        $data = Status::all();
+        return view('crm.frontend.leads.leadsstatus', compact('title','data'));
     }
 
     public function leadssource(Request $request)
     {
         $title = 'Leads Source';
-        return view('crm.frontend.leadssource', compact('title'));
+        $data = Source::all();
+        return view('crm.frontend.leads.leadssource', compact('title','data'));
+    }
+
+    public function addleads(Request $request)
+    {
+        $title = 'Add Leads';
+        // $leads = Lead::select('source', 'status', 'agent_assign')->distinct()->get();
+
+        $sources = Source::select('id', 'source_name')
+                ->where('active', 1)
+                ->get();
+
+        $statuses = Status::select('id', 'status_name')
+                ->where('active', 1)
+                ->get();
+
+        $agents = User::select('id','name') -> get();
+
+        return view('crm.frontend.leads.addleads', compact('title','sources','statuses','agents'));
+
+    }
+
+    public function users(Request $request)
+    {
+        $title = 'Users';
+        $data = User::all();
+        return view('crm.frontend.users.users', compact('title','data'));
     }
 
 }

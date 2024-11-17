@@ -65,12 +65,28 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                @foreach ($data as $status)
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>2</td>
-                                                        <td>2</td>
-                                                    </tr>
+                                                        <td>{{$status->id}}</td>
+                                                        <td>{{$status->status_name}}</td>
+                                                        <td></td>
+                                                        <td>
+                                                            <div class="form-check form-switch">
+                                                                <input 
+                                                                    class="form-check-input toggle-active" 
+                                                                    type="checkbox" 
+                                                                    role="switch" 
+                                                                    id="switch-{{ $status->id }}" 
+                                                                    {{ $status->active == 1 ? 'checked' : '' }} 
+                                                                    data-id="{{ $status->id }}"
+                                                                >
+                                                                <label class="form-check-label" for="switch-{{ $status->id }}">
+                                                                    {{ $status->active == 1 ? 'Active' : 'Inactive' }}
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>    
+                                                 @endforeach       
                                                 </tbody>
                                             </table>
                                         </div>

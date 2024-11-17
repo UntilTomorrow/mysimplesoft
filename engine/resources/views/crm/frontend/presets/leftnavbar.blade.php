@@ -22,18 +22,18 @@
                                 Dashboards
                                 <span class="badge bg-primary-soft text-primary ms-auto">New</span>
                             </a>
-                            <div class="sidenav-menu-heading"></div>
+                            <div class="sidenav-menu-heading">Feature</div>
                             <!-- Leads Menu -->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapsePagesleads" aria-expanded="false" aria-controls="collapsePagesleads">
                                 <div class="nav-link-icon"><i class="fa-solid fa-list-check"></i></div>
                                 <span>Leads</span>
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapsePagesleads" data-bs-parent="#accordionSidenav">
+                            <div class="collapse" id="collapsePagesleads" data-bs-parent="#accordionSidenavLeads">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
                                     <a class="nav-link" href="{{ route('leadscrm') }}">List</a>
                                     <a class="nav-link" href="{{ route('leadssource') }}">Source</a>
-                                    <a class="nav-link" href="#">Status</a>
+                                    <a class="nav-link" href="{{ route('leadsstatus') }}">Status</a>
                                     <a class="nav-link" href="#">Setting</a>
                                 </nav>
                             </div>
@@ -43,10 +43,23 @@
                                 <span>Proposals</span>
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapsePagesProposals" data-bs-parent="#accordionSidenav">
+                            <div class="collapse" id="collapsePagesProposals" data-bs-parent="#accordionSidenavProposals">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenuProposals">
                                     <a class="nav-link" href="#">List</a>
                                     <a class="nav-link" href="#">Setting</a>
+                                </nav>
+                            </div>
+                            <!-- User Management Menu -->
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapsePagesUsers" aria-expanded="false" aria-controls="collapsePagesUsers">
+                                <div class="nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                                <span>Management Users</span>
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePagesUsers" data-bs-parent="#accordionSidenavUsers">
+                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenuUsers">
+                                    <a class="nav-link" href="{{ route('users') }}">User List</a>
+                                    <a class="nav-link" href="#">Group List</a>
+                                    <a class="nav-link" href="#">Role List</a>
                                 </nav>
                             </div>
                         </div>

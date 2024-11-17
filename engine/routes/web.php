@@ -24,6 +24,9 @@ Route::group(['prefix' => 'crm'], function () {
     Route::get('/leads', [CrmMainController::class,'leads'])->middleware('auth')->name('leadscrm');
     Route::get('/leads_source', [CrmMainController::class,'leadssource'])->middleware('auth')->name('leadssource');
     Route::get('/leads_status', [CrmMainController::class,'leadsstatus'])->middleware('auth')->name('leadsstatus');
+    Route::get('/leads_add', [CrmMainController::class,'addleads'])->middleware('auth')->name('addleads');
+
+    Route::get('/users', [CrmMainController::class,'users'])->middleware('auth')->name('users');
 
 });
 

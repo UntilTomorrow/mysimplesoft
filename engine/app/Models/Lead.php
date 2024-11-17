@@ -21,4 +21,17 @@ class Lead extends Model
         'agent_assign',
         'group',
     ];
+
+    public function source()
+    {
+        return $this->belongsTo(Source::class, 'source');
+    }
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status');        
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'agent_assign');
+    }
 }

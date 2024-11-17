@@ -16,6 +16,13 @@
                                             List Source Leads
                                         </h1>
                                     </div>
+                                    <div class="col-12 col-xl-auto mb-3">
+                                        <a class="btn btn-sm btn-light text-primary" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle me-1">
+                                                <path d="M9.09 9a3 3 0 1 1 5.83 1c-.32.75-.83 1.23-1.5 1.5-.67.27-1 .55-1 1.5m0 3h.01"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +60,7 @@
                              <!-- Table-->
                             <div class="col-xl-8">
                                 <div class="card">
-                                    <div class="card-header">Leads</div>
+                                    <div class="card-header">List Data</div>
                                         <div class="card-body">
                                             <table id="datatablesSimple">
                                                 <thead>
@@ -61,16 +68,32 @@
                                                         <th>No</th>
                                                         <th>Name</th>
                                                         <th>Color</th>
-                                                        <th>Action</th>
+                                                        <th>Active</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach ($data as $sources)
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>2</td>
-                                                        <td>2</td>
+                                                        <td>{{$sources->id}}</td>
+                                                        <td>{{$sources->source_name}}</td>
+                                                        <td></td>
+                                                        <td>
+                                                            <div class="form-check form-switch">
+                                                                <input 
+                                                                    class="form-check-input toggle-active" 
+                                                                    type="checkbox" 
+                                                                    role="switch" 
+                                                                    id="switch-{{ $sources->id }}" 
+                                                                    {{ $sources->active == 1 ? 'checked' : '' }} 
+                                                                    data-id="{{ $sources->id }}"
+                                                                >
+                                                                <label class="form-check-label" for="switch-{{ $sources->id }}">
+                                                                    {{ $sources->active == 1 ? 'Active' : 'Inactive' }}
+                                                                </label>
+                                                            </div>
+                                                        </td>
                                                     </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
