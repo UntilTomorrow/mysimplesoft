@@ -8,11 +8,8 @@
         <meta name="author" content="" />
         <title>{{ $title ?? 'My Simplesoft' }}</title> 
         <link rel="stylesheet" href="{{asset('assets/crm/css/styles.css')}}">
-        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
         <link rel="icon" type="image/x-icon" href="{{asset('assets/crm/assets/img/favicon.png')}}">
+        <script src="{{asset('assets/crm/js/font/all.min.js')}}"></script>
     </head>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </html>

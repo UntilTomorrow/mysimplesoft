@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Source;
 use App\Models\Status;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class CrmMainController extends Controller
 {
@@ -56,6 +57,35 @@ class CrmMainController extends Controller
 
         return view('crm.frontend.leads.addleads', compact('title','sources','statuses','agents'));
 
+    }
+
+    public function storeleads(Request $request)
+    {
+        $validatedData = $request->validate([
+            'source' => 'required',
+            'status' => 'required',
+            'agent' => 'required',
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'company' => 'required',
+        ]);
+    
+        $lead = new Lead();
+        $lead->source = $validatedData['source'];
+        $lead->status = $validatedData['status'];
+        $lead->agent_assign = $validatedData['agent'];
+        $lead->name = $validatedData['name'];
+        $lead->phone = $validatedData['phone'];
+        $lead->email = $validatedData['email'];
+        $lead->address = $validatedData['address'];
+        $lead->company_name = $validatedData['company'];
+        $lead->created_by = Auth::user()->id;
+
+        $lead->save();
+    
+        return response()->json(['message' => 'Lead berhasil disimpan!']);
     }
 
     public function users(Request $request)

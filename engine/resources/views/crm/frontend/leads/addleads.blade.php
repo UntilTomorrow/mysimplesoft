@@ -32,7 +32,8 @@
                         <div class="card mb-4">
                                     <div class="card-header">Add Leads</div>
                                     <div class="card-body">
-                                        <form>
+                                    <form id="form-leads">
+                                        @csrf
                                         <div style="display: flex; gap: 20px; align-items: flex-start;">
                                             <!-- Source -->
                                             <div>
@@ -88,7 +89,7 @@
                                                 <input class="form-control" id="company" type="text" value="" />
                                             </div>
                                             <button class="btn btn-primary" type="button">Create Lead</button>
-                                        </form>
+                                    </form>
                                     </div>
                                 </div>
                     </div>
@@ -97,4 +98,36 @@
             </div>
         </div>
 @include('crm.frontend.js')
+<script>
+    $(document).ready(function() {
+        $('#form-leads button[type="button"]').click(function(e) {
+            e.preventDefault();
+            var formData = {
+                source: $('#source').val(),
+                status: $('#status').val(),
+                agent: $('#agent').val(),
+                name: $('#name').val(),
+                phone: $('#phone').val(),
+                email: $('#email').val(),
+                address: $('#address').val(),
+                company: $('#company').val(),
+                _token: $('input[name="_token"]').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("storeleads") }}',
+                data: formData,
+                success: function(data) {
+                    console.log(data);
+                    alert('Lead berhasil disimpan!');
+                    window.location.href = '{{ route("addleads") }}';
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert('Gagal menyimpan lead!');
+                }
+            });
+        });
+    });
+</script>
 </body>
